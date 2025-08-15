@@ -174,13 +174,13 @@ input_data_numpy_array = np.asarray(input_data)
 input_data_numpy_array.shape
 
 #reshape the data inorder to predict 
-# the flower type for the one data point 
+#the flower type for the one data point 
 
 input_data_reshape = input_data_numpy_array.reshape(1,-1)
 input_data_reshape.shape
 
 
-# now lets make the prediction with the one data point
+#now lets make the prediction with the one data point
 prediction = model.predict(input_data_reshape)
 print(prediction )
 
