@@ -122,3 +122,65 @@ corr_df = Iris_data1[['sepal_length', 'sepal_width',
 
 
 sns.heatmap(corr_df,annot=True)
+
+#machine learning 
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split 
+from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix, classification_report
+
+
+# separating data 
+X, Y = Iris_data1.drop('flower_type',axis=1), Iris_data1['flower_type']
+
+
+
+#train and test split 
+
+X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size= 0.2, 
+                                                    random_state=2) 
+print(Y.shape,Y_train.shape,Y_test.shape )
+
+print(X.shape,X_test.shape,X_train.shape)
+
+
+
+#training our model 
+#Multinomial Logistic regression 
+
+model = LogisticRegression(multi_class= "multinomial")
+
+model.fit(X_train,Y_train)
+
+
+#model evaluation 
+X_test_prediction = model.predict(X_test)
+test_data_accuracy = accuracy_score(X_test_prediction,Y_test)
+print("Accuracy : " ,test_data_accuracy)
+print("Precision (macro):", precision_score(X_test_prediction,Y_test, average='macro'))
+print("Recall (macro):", recall_score(X_test_prediction,Y_test, average='macro'))
+
+
+confusion__matrix = confusion_matrix(X_test_prediction,Y_test)
+
+Iris_data1.iloc[1,]
+#building a predictive system 
+
+input_data = (4.9,3.0,1.4,0.2)
+
+#changing the input data in a numpy array 
+
+input_data_numpy_array = np.asarray(input_data)
+input_data_numpy_array.shape
+
+#reshape the data inorder to predict 
+# the flower type for the one data point 
+
+input_data_reshape = input_data_numpy_array.reshape(1,-1)
+input_data_reshape.shape
+
+
+# now lets make the prediction with the one data point
+prediction = model.predict(input_data_reshape)
+print(prediction )
+
